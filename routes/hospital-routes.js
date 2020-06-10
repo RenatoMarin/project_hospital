@@ -2,8 +2,8 @@ const express = require('express')
 var router = express.Router()
 
 //CONSTRUTORES
-const Hospital = require("../hospital")
-const HospitalService = require("../hospital-service")
+const Hospital = require("../models/hospital")
+const HospitalService = require("../services/hospital-service")
 var hospitalService = new HospitalService()
 
 //MÉTODO GET
