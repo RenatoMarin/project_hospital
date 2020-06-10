@@ -1,23 +1,25 @@
+const HospitalRepoArray = require("../repositories/hospital-repo-array")
+
 class HospitalService {
     
     constructor(){
-        this.hospitais = []
+        this.hospitalRepository = new HospitalRepoArray()
     }
 
     cadastrarHospital(hospital){
-        this.hospitais.push(hospital)
+        this.hospitalRepository.cadastrarHospital(hospital)
     }
     excluirHospital(id){
-
+        this.hospitalRepository.excluirHospital(id)
     }
     alterarHospital(hospital){
-
+        this.hospitalRepository.alterarHospital(hospital)
     }
     buscarHospital(hospital){
-
+        this.hospitalRepository.buscarHospital(hospital)
     }
     buscarTodosHospitais(){
-        return this.hospitais;
+        return this.hospitalRepository.buscarTodosHospitais()
     }
 }
 
