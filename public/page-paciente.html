@@ -9,20 +9,19 @@
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 	    <link rel="stylesheet" href="css/stylesheet.css">
 
-      <link rel="stylesheet" href="css/snippetCircle.css">
-		<title>Home</title>
+		<title>Paciente</title>
 	</head>
 
 	<body>
-		<section id="secHospital">
+		<section id="secRegister">
 			<div class="container">
 				<div class="row buttonGroup">
-					<div class="col-6 offset-6">
+					<div class="col-4 offset-8 registerBox">
 						<form>
 							<div class="form-row">
 								<div class="form-group col-md-12">
-							      <label for="inputGender">Hospital*</label>
-							      <select id="inputGender" class="form-control">
+							      <label for="inputHospName">Hospital*</label>
+							      <select id="inputHospName" class="form-control">
 							        <option selected value="">Selecione o hospital</option>
 							      </select>
 							    </div>
@@ -43,8 +42,11 @@
 							      </select>
 							    </div>
 							</div>
-							<button type="submit" class="btn btn-primary">Enviar</button>
-							<a class="btn btn-primary" href="home.html" role="button">Voltar</a>
+							<div class="anchors">
+								<button id="sendPacient" class="btn btn-primary">Enviar</button>
+								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Voltar</a>
+								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Lista de pacientes</a>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -54,6 +56,50 @@
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+	<script>
+		//RECEBER HOSPITAIS
+		$(document).ready(function() {
+			var hospitalName = [];
+			fetch('http://localhost:3000/hospital')
+			.then(function(response){
+				response.json().then(function(data){
+					var hospNames;
+					//console.log(data)
+					if(data.length > 0){
+						var len = data.length;
+						for(var i = 0; i < len; i++){
+							var nome = data[i].nome;
+							hospNames = '<option>'+ nome +'</option>'
+							$('#inputHospName').append(hospNames);
+						}
+					}
+				});
+			})
+			.catch(function(err){ 
+				console.error('Falha ao pegar a informação', err);
+			});
+		}); 
+
+		//ENVIAR CADASTRO PACIENTE
+		$('#sendPacient').click(function () {
+			fetch('http://localhost:3000/paciente',{
+				method:'post',
+				body:JSON.stringify({
+					nome: document.getElementById("inputPacNome").value,
+					idade: document.getElementById("inputPacAge").value,
+					genero: document.getElementById("inputGender").value,
+				}),headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			}).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				console.log(data)
+			});
+		});
+	</script>
+
 	</body>
 
 </html>

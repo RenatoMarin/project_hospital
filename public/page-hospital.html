@@ -9,15 +9,14 @@
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 	    <link rel="stylesheet" href="css/stylesheet.css">
 
-      <link rel="stylesheet" href="css/snippetCircle.css">
-		<title>Home</title>
+		<title>Hospital</title>
 	</head>
 
 	<body>
-		<section id="secHospital">
+		<section id="secRegister">
 			<div class="container">
 				<div class="row buttonGroup">
-					<div class="col-6 offset-6">
+					<div class="col-4 offset-8 registerBox">
 						<form>
 							<div class="form-row">
 							    <div class="form-group col-md-12">
@@ -29,16 +28,18 @@
 							      <input type="text" class="form-control" id="inputLeitos" placeholder="Leitos">
 							    </div>
 							    <div class="form-group col-md-8">
-							      <label for="inputGender">Tipo do hospital</label>
-							      <select id="inputGender" class="form-control">
+							      <label for="inputType">Tipo do hospital</label>
+							      <select id="inputType" class="form-control">
 							        <option selected value="">Selecione um tipo</option>
 							        <option value="c">Campanha</option>
 							        <option value="n">Normal</option>
 							      </select>
 							    </div>
 							</div>
-							<button type="submit" class="btn btn-primary">Enviar</button>
-							<a class="btn btn-primary" href="home.html" role="button">Voltar</a>
+							<div class="anchors">
+								<button id="sendHospital" class="btn btn-primary">Enviar</button>
+								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Voltar</a>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -48,6 +49,27 @@
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+	<script>
+		//ENVIAR CADASTRO HOSPITAL
+		$('#sendHospital').click(function () {
+			fetch('http://localhost:3000/hospital',{
+				method:'post',
+				body:JSON.stringify({
+					nome: document.getElementById("inputHopsName").value,
+					leitos: document.getElementById("inputLeitos").value,
+					tipo: document.getElementById("inputType").value,
+				}),headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			}).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				console.log(data)
+			});
+		});
+	</script>
+
 	</body>
 
 </html>
