@@ -204,4 +204,7 @@
 	#secRegister .registerBox {
 		margin-top: 135px;
 	}
+	#secHome .buttonGroup h1 {
+		text-shadow: 1px 1px black;
+	}	
 }
