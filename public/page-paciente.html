@@ -23,7 +23,7 @@
 								<div class="form-group col-md-12">
 							      <label for="inputHospName">Hospital*</label>
 							      <select id="inputHospName" class="form-control">
-							        <option selected data-id="" data-nome="">Selecione o hospital</option>
+							        <option selected data-id="">Selecione o hospital</option>
 							      </select>
 							    </div>
 							    <div class="form-group col-md-12">
@@ -71,7 +71,7 @@
 						for(var i = 0; i < len; i++){
 							var id = data[i]._id;
 							var nome = data[i].nome;
-							hospNames = '<option data-id='+id+' value='+nome+'>'+ nome +'</option>'
+							hospNames = '<option data-id='+id+'>'+ nome +'</option>'
 							$('#inputHospName').append(hospNames);
 						}
 					}
@@ -86,7 +86,7 @@
 		$('#sendPacient').click(function () {
 			var hospValue = document.getElementById("inputHospName");
 			var hospId = hospValue.options[hospValue.selectedIndex].dataset.id;
-			var hospitalName = hospValue.options[hospValue.selectedIndex].dataset.nome;
+			var hospitalName = $("#inputHospName option:selected").html();
 			fetch('https://project-hospital.herokuapp.com/paciente',{
 				method:'post',
 				body:JSON.stringify({
