@@ -71,7 +71,7 @@
 						for(var i = 0; i < len; i++){
 							var id = data[i]._id;
 							var nome = data[i].nome;
-							hospNames = '<option data-id='+id+' data-nome='+ nome +'>'+ nome +'</option>'
+							hospNames = '<option data-id='+id+' value='+nome+'>'+ nome +'</option>'
 							$('#inputHospName').append(hospNames);
 						}
 					}
