@@ -1,9 +1,10 @@
-const PacienteRepoArray = require("../repositories/paciente-repo-array")
+//const PacienteRepoArray = require("../repositories/paciente-repo-array")
+const PacienteRepoMongo = require("../repositories/paciente-repo-mongo")
 
 class PacienteService {
     
     constructor(){
-        this.pacienteRepository = new PacienteRepoArray()
+        this.pacienteRepository = new PacienteRepoMongo()
     }
 
     cadastrarPaciente(paciente){
