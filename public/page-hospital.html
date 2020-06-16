@@ -55,7 +55,7 @@
 	<script>
 		//ENVIAR CADASTRO HOSPITAL
 		$('#sendHospital').click(function () {
-			fetch('http://localhost:3000/hospital',{
+			fetch('https://project-hospital.herokuapp.com/hospital',{
 				method:'post',
 				body:JSON.stringify({
 					nome: document.getElementById("inputHopsName").value,

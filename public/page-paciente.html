@@ -61,7 +61,7 @@
 	<script>
 		//RECEBER HOSPITAIS
 		$(document).ready(function() {
-			fetch('http://localhost:3000/hospital')
+			fetch('https://project-hospital.herokuapp.com/hospital')
 			.then(function(response){
 				response.json().then(function(data){
 					var hospNames;
@@ -87,7 +87,7 @@
 			var hospValue = document.getElementById("inputHospName");
 			var hospId = hospValue.options[hospValue.selectedIndex].dataset.id;
 			var hospitalName = hospValue.options[hospValue.selectedIndex].dataset.nome;
-			fetch('http://localhost:3000/paciente',{
+			fetch('https://project-hospital.herokuapp.com/paciente',{
 				method:'post',
 				body:JSON.stringify({
 					nome: document.getElementById("inputPacNome").value,
