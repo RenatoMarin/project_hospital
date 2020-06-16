@@ -29,6 +29,14 @@
 	padding-top: 15px;
     padding-bottom: 15px;
 }
+#secHome img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+}
 #secHome .buttonGroup{
 	align-items: center;
     display: flex;
@@ -65,6 +73,18 @@
 	border-radius: 20px 0px 20px 0px;
 	padding-top: 15px;
     padding-bottom: 15px;
+}
+#secRegister .registerBox h4 {
+	color: #E83136;
+	font-weight: 600;
+}
+#secRegister img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
 }
 #secRegister label {
 	color: #E83136;
@@ -103,6 +123,67 @@
 	font-size: 12px;
 }
 #secRegister .buttonGroup a:hover, #secRegister .buttonGroup button:hover{
+	background-color: white;
+	border: 2px solid #E83136;
+	color: #E83136;
+}
+/* Listas
+/---------------------------------------------------------------------------- */
+#secList {
+	background-color: #E83136;
+	min-height: 100vh;
+}
+#secList .cardImg {
+	background-color: white;
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px 0px 20px 0px;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+#secList img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    display: block;
+	margin-right: auto;
+}
+#secList h3{
+	text-align: center;
+    color: #E83136;
+    font-weight: 600;
+    margin-top: 25px;
+}
+#secList .card{
+	background-color: white;
+	border-radius: 0px 20px 0px 20px;
+	padding: 15px;
+	margin-bottom: 20px;
+}
+#secList .card p{
+	color: #E83136;
+	font-size: 16px;
+	font-weight: 500;
+}
+#secList .anchors {
+	text-align: center;
+    margin-top: 60px;
+    padding-bottom: 60px;
+}
+#secList .anchors a, #secRegister .anchors button {
+	background-color: #E83136;
+	border: 2px solid white;
+	color: white;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+#secList .anchors a:hover, #secRegister .anchors button:hover{
 	background-color: white;
 	border: 2px solid #E83136;
 	color: #E83136;
