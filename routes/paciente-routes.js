@@ -2,18 +2,20 @@ const express = require('express')
 var router = express.Router()
 
 //CONSTRUTORES
-const Paciente = require("../models/paciente")
+const Paciente = require("../model/paciente-model")
 const PacienteService = require("../services/paciente-service")
 var pacienteService = new PacienteService()
 
 //MÉTODO GET
-router.get("/paciente", (req, res)=>{
-    res.json(pacienteService.buscarTodosPacientes())
+router.get("/paciente", async (req, res)=>{
+    //ESPERA O RESULTADO DA PROMISE
+    const pacientes= await pacienteService.buscarTodosPacientes();
+    res.json(pacientes)
 })
 
 //MÉTODO POST
 router.post("/paciente", (req, res)=>{
-    let paciente = new Paciente(req.body.nome, req.body.idade, req.body.genero);
+    let paciente = new Paciente({nome: req.body.nome, idade: req.body.idade, genero: req.body.genero, hospitalName: req.body.hospitalName, hospId: req.body.hospId});
     pacienteService.cadastrarPaciente(paciente)
     res.json(paciente)
 })
