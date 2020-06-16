@@ -39,7 +39,7 @@
     <script>
         //RECEBER PACIENTE
 		$(document).ready(function() {
-			fetch('http://localhost:3000/hospital')
+			fetch('https://project-hospital.herokuapp.com/hospital')
 			.then(function(response){
 				response.json().then(function(data){
 					var hospitalNames;
