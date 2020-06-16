@@ -16,13 +16,14 @@
 		<section id="secRegister">
 			<div class="container">
 				<div class="row buttonGroup">
-					<div class="col-4 offset-8 registerBox">
+					<div class="col-4 offset-9 registerBox">
+						<img src="img/paciente.png" alt="pacienteIcon">
 						<form>
 							<div class="form-row">
 								<div class="form-group col-md-12">
 							      <label for="inputHospName">Hospital*</label>
 							      <select id="inputHospName" class="form-control">
-							        <option selected value="">Selecione o hospital</option>
+							        <option selected data-id="" data-nome="">Selecione o hospital</option>
 							      </select>
 							    </div>
 							    <div class="form-group col-md-12">
@@ -43,9 +44,9 @@
 							    </div>
 							</div>
 							<div class="anchors">
-								<button id="sendPacient" class="btn btn-primary">Enviar</button>
+								<a id="sendPacient" class="btn btn-primary" role="button">Enviar</a>
 								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Voltar</a>
-								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Lista de pacientes</a>
+								<a class="btn btn-primary" href="lista-paciente.html" role="button">Lista de pacientes</a>
 							</div>
 						</form>
 					</div>
@@ -60,7 +61,6 @@
 	<script>
 		//RECEBER HOSPITAIS
 		$(document).ready(function() {
-			var hospitalName = [];
 			fetch('http://localhost:3000/hospital')
 			.then(function(response){
 				response.json().then(function(data){
@@ -69,8 +69,9 @@
 					if(data.length > 0){
 						var len = data.length;
 						for(var i = 0; i < len; i++){
+							var id = data[i]._id;
 							var nome = data[i].nome;
-							hospNames = '<option>'+ nome +'</option>'
+							hospNames = '<option data-id='+id+' data-nome='+ nome +'>'+ nome +'</option>'
 							$('#inputHospName').append(hospNames);
 						}
 					}
@@ -83,12 +84,17 @@
 
 		//ENVIAR CADASTRO PACIENTE
 		$('#sendPacient').click(function () {
+			var hospValue = document.getElementById("inputHospName");
+			var hospId = hospValue.options[hospValue.selectedIndex].dataset.id;
+			var hospitalName = hospValue.options[hospValue.selectedIndex].dataset.nome;
 			fetch('http://localhost:3000/paciente',{
 				method:'post',
 				body:JSON.stringify({
 					nome: document.getElementById("inputPacNome").value,
 					idade: document.getElementById("inputPacAge").value,
 					genero: document.getElementById("inputGender").value,
+					hospId: hospId,
+					hospitalName: hospitalName
 				}),headers: {
 					'Content-Type': 'application/json;charset=utf-8'
 				}
@@ -97,6 +103,7 @@
 			}).then(function(data) {
 				console.log(data)
 			});
+			window.location.href = "post-cadastro-paciente.html";
 		});
 	</script>
 

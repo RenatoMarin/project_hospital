@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/stylesheet.css">
+		
+		<title>Home</title>
+	</head>
+
+	<body>
+		<section id="secList">
+			<div class="container">
+				<div class="row buttonGroup">
+					<div class="col-12">
+                        <div class="cardImg">
+                            <img src="img/hospital.png" alt="hospitalIcon">
+                            <h3>Lista de hospitais</h3>
+                        </div>
+					</div>
+                </div>
+                <div id="cardList" class="row">
+                </div>
+                <div class="anchors" class="row">
+                    <a class="btn btn-primary" href="page-hospital.html" role="button">Cadastrar novo hospital</a>
+                    <a class="btn btn-primary" href="lista-paciente.html" role="button">Lista de pacientes</a>
+                    <a class="btn btn-primary" href="http://localhost:3000/" role="button">Voltar para home</a>
+                </div>
+			</div>
+		</section>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script>
+        //RECEBER PACIENTE
+		$(document).ready(function() {
+			fetch('http://localhost:3000/hospital')
+			.then(function(response){
+				response.json().then(function(data){
+					var hospitalNames;
+					console.log(data)
+					if(data.length > 0){
+						var len = data.length;
+						for(var i = 0; i < len; i++){
+                            var nome = data[i].nome;
+                            var leitos = data[i].leitos;
+                            var tipo = data[i].tipo;
+                            if(tipo == "c"){
+                                tipo = "Campanha";
+                            } else {
+                                tipo = "Normal"
+                            }
+                            hospitalNames = '<div class="col-4"><div class="card"><p>Nome do hospital: '+nome+'</p><p>Númerode Leitos: '+leitos+'</p><p>Tipo: '+tipo+'</p></div></div>'
+							$('#cardList').append(hospitalNames);
+						}
+					}
+				});
+			})
+			.catch(function(err){ 
+				console.error('Falha ao pegar a informação', err);
+			});
+		}); 
+    </script>
+    
+    </body>
+
+</html>

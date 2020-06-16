@@ -16,7 +16,8 @@
 		<section id="secRegister">
 			<div class="container">
 				<div class="row buttonGroup">
-					<div class="col-4 offset-8 registerBox">
+					<div class="col-4 offset-9 registerBox">
+						<img src="img/hospital.png" alt="hospitalIcon">
 						<form>
 							<div class="form-row">
 							    <div class="form-group col-md-12">
@@ -37,8 +38,9 @@
 							    </div>
 							</div>
 							<div class="anchors">
-								<button id="sendHospital" class="btn btn-primary">Enviar</button>
+								<a id="sendHospital" class="btn btn-primary" role="button">Enviar</a>
 								<a class="btn btn-primary" href="http://localhost:3000/" role="button">Voltar</a>
+								<a class="btn btn-primary" href="lista-hospital.html" role="button">Lista de hospitais</a>
 							</div>
 						</form>
 					</div>
@@ -67,6 +69,7 @@
 			}).then(function(data) {
 				console.log(data)
 			});
+			window.location.href = "post-cadastro-hospital.html";
 		});
 	</script>
 
