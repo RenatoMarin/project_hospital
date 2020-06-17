@@ -110,6 +110,7 @@
 			var idade = document.getElementById("inputPacAge").value;
 			var genero = document.getElementById("inputGender").value;
 			var hospValue = document.getElementById("inputHospName");
+			var hospitalName = $("#inputHospName option:selected").html();
 			var hospId = hospValue.options[hospValue.selectedIndex].dataset.id;
 			//VALIDADOR DE CAMPO VAZIO
 			if(hospId == ""){
