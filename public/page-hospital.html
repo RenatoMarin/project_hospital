@@ -55,12 +55,30 @@
 	<script>
 		//ENVIAR CADASTRO HOSPITAL
 		$('#sendHospital').click(function () {
+			var nome = document.getElementById("inputHopsName").value;
+			var leitos = document.getElementById("inputLeitos").value;
+			var tipo = document.getElementById("inputGender").value;
+
+			//VALIDADOR DE CAMPO VAZIO
+			if(nome == ""){
+				alert("Campo nome está vazio!")
+				return false
+			}
+			if(leitos == ""){
+				alert("Campo leitos está vazio!")
+				return false
+			}
+			if(tipo == ""){
+				alert("Campo tipo está vazio!")
+				return false
+			}
+			
 			fetch('https://project-hospital.herokuapp.com/hospital',{
 				method:'post',
 				body:JSON.stringify({
-					nome: document.getElementById("inputHopsName").value,
-					leitos: document.getElementById("inputLeitos").value,
-					tipo: document.getElementById("inputType").value,
+					nome: nome,
+					leitos: leitos,
+					tipo: tipo,
 				}),headers: {
 					'Content-Type': 'application/json;charset=utf-8'
 				}

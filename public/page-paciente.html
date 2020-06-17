@@ -59,6 +59,28 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 	<script>
+		//VALIDADOR DE NÚMERO PARA IDADE
+		(function($) {
+		$.fn.inputFilter = function(inputFilter) {
+			return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+			if (inputFilter(this.value)) {
+				this.oldValue = this.value;
+				this.oldSelectionStart = this.selectionStart;
+				this.oldSelectionEnd = this.selectionEnd;
+			} else if (this.hasOwnProperty("oldValue")) {
+				this.value = this.oldValue;
+				this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+			} else {
+				this.value = "";
+			}
+			});
+		};
+		}(jQuery));
+
+		$("#inputPacAge").inputFilter(function(value) {
+			  return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 120); 
+		});
+		
 		//RECEBER HOSPITAIS
 		$(document).ready(function() {
 			fetch('https://project-hospital.herokuapp.com/hospital')
@@ -84,15 +106,35 @@
 
 		//ENVIAR CADASTRO PACIENTE
 		$('#sendPacient').click(function () {
+			var nome = document.getElementById("inputPacNome").value;
+			var idade = document.getElementById("inputPacAge").value;
+			var genero = document.getElementById("inputGender").value;
 			var hospValue = document.getElementById("inputHospName");
 			var hospId = hospValue.options[hospValue.selectedIndex].dataset.id;
-			var hospitalName = $("#inputHospName option:selected").html();
+			//VALIDADOR DE CAMPO VAZIO
+			if(hospId == ""){
+				alert("Campo Hospital está vazio!")
+				return false
+			}
+			if(nome == ""){
+				alert("Campo nome está vazio!")
+				return false
+			}
+			if(idade == ""){
+				alert("Campo idade está vazio!")
+				return false
+			}
+			if(genero == ""){
+				alert("Campo genero está vazio!")
+				return false
+			}
+
 			fetch('https://project-hospital.herokuapp.com/paciente',{
 				method:'post',
 				body:JSON.stringify({
-					nome: document.getElementById("inputPacNome").value,
-					idade: document.getElementById("inputPacAge").value,
-					genero: document.getElementById("inputGender").value,
+					nome: nome,
+					idade: idade,
+					genero: genero,
 					hospId: hospId,
 					hospitalName: hospitalName
 				}),headers: {
